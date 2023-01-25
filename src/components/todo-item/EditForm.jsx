@@ -1,7 +1,10 @@
-import React from "react"
+import React, { useContext } from "react"
+import { TodoListContext } from "../../store/TodoProvider"
 import styled from "styled-components"
 
-const EditForm = ({ dispatch, state, setIsVisible, todo }) => {
+const EditForm = ({ setIsVisible, todo }) => {
+  const [state, dispatch] = useContext(TodoListContext)
+
   const editTodoHandler = (id) => {
     dispatch({ type: "EDIT", payload: id })
     setIsVisible(false)

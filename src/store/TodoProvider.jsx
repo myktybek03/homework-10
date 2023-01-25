@@ -1,3 +1,13 @@
+import React, { createContext, useReducer } from "react"
+
+export const TodoListContext = createContext()
+
+const initialState = {
+  todos: JSON.parse(localStorage.getItem("todos") || "[]"),
+  inputValue: "",
+  editInputValue: "",
+}
+
 export const reducer = (state, action) => {
   switch (action.type) {
     case "value": {
@@ -52,3 +62,14 @@ export const reducer = (state, action) => {
     }
   }
 }
+
+export const TodoProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(reducer, initialState)
+  return (
+    <TodoListContext.Provider value={[state, dispatch]}>
+      {children}
+    </TodoListContext.Provider>
+  )
+}
+
+export default TodoProvider

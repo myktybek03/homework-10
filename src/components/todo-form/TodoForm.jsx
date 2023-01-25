@@ -1,7 +1,9 @@
-import React from "react"
+import React, { useContext } from "react"
 import styled from "styled-components"
+import { TodoListContext } from "../../store/TodoProvider"
 
-const TodoForm = ({ state, dispatch }) => {
+const TodoForm = () => {
+  const [state, dispatch] = useContext(TodoListContext)
   const submitHandler = (e) => {
     e.preventDefault()
 

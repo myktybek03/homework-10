@@ -1,8 +1,10 @@
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import EditForm from "./EditForm"
 import styled from "styled-components"
+import { TodoListContext } from "../../store/TodoProvider"
 
-const TodoItem = ({ state, dispatch, todo }) => {
+const TodoItem = ({ todo }) => {
+  const [state, dispatch] = useContext(TodoListContext)
   const [isVisible, setIsVisible] = useState(false)
   const deleteTodoHandler = (id) => {
     dispatch({ type: "DELETE", payload: id })
@@ -18,12 +20,7 @@ const TodoItem = ({ state, dispatch, todo }) => {
   return (
     <div>
       {isVisible ? (
-        <EditForm
-          dispatch={dispatch}
-          setIsVisible={setIsVisible}
-          state={state}
-          todo={todo}
-        />
+        <EditForm setIsVisible={setIsVisible} todo={todo} />
       ) : (
         <Ul>
           <Li>
